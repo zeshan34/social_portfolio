@@ -1,11 +1,18 @@
 const express = require ('express');
 // Morgan middleware library to log server requests, and you used Express's built-in express.static middleware to serve static HTML files.
 const morgan =require('morgan');
+const bodyparser = require('body-parser');
+const usersRouter = require('./route/usersRouters');
+
 const hostname ='localhost';
 const port = 3000;
 
 const app = express();
 app.use(morgan('dev'));
+
+app.use(bodyparser.json());
+app.use('/users',usersRouter);
+
 
 app.use(express.static(__dirname+'public'));
 
